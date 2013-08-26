@@ -30,14 +30,13 @@ package { $pip_pkgs:
 
 service { 'carbon-cache':
     ensure  => running,
-    stop    => '/opt/graphite/bin/carbon-cache stop',
-    start   => '/opt/graphite/bin/carbon-cache start',
-    status  => '/opt/graphite/bin/carbon-cache status',
+    stop    => '/opt/graphite/bin/carbon-cache.py stop',
+    start   => '/opt/graphite/bin/carbon-cache.py start',
+    status  => '/opt/graphite/bin/carbon-cache.py status',
     require => Package['carbon','whisper'],
 }
 
-# also graphite.conf and httpd.conf
-
+# Apache configuration
 file { '/etc/httpd/conf.d/0NameVirtualHost.conf':
   ensure  => present,
   content => 'NameVirtualHost *:80',
