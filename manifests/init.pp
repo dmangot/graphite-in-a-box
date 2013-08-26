@@ -13,18 +13,19 @@ package { 'EPEL-repo':
     source   => 'http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm',
   }
 
-package { 'python-pip':
-    ensure  => latest,
-    require => Package['EPEL-repo']
+$python_prereqs = [ 'python-pip', 'python-devel']
+
+package { $python_prereqs:
+  ensure  => latest,
+  require => Package['EPEL-repo']
 }
 
 $pip_pkgs = [ 'graphite-web', 'carbon', 'whisper']
 
-
 package { $pip_pkgs:
   ensure   => present,
   provider => pip,
-  require  => Package['python-pip']
+  require  => Package[ $python_prereqs ],
 }
 
 service { 'carbon-cache':
