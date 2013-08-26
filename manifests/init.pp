@@ -22,7 +22,7 @@ $pip_pkgs = [ 'graphite-web', 'carbon', 'whisper']
 
 
 package { $pip_pkgs:
-  ensure   => latest,
+  ensure   => present,
   provider => pip,
   require  => Package['python-pip']
 }
