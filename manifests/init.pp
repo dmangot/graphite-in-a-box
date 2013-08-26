@@ -84,11 +84,20 @@ file { '/opt/graphite/storage':
   mode   => '0775',
 }
 
-# http://obfuscurity.com/2012/04/Unhelpful-Graphite-Tip-4
+# http://obfuscurity.com/2012/04/Unhelpful-Graphite-Tip-
 exec { 'syncdb':
     command => '/usr/bin/python /opt/graphite/webapp/graphite/manage.py syncdb --noinput',
     unless  => '/usr/bin/python /opt/graphite/webapp/graphite/manage.py inspectdb | grep account_mygraph',
     require => Package['graphite-web'],
+}
+
+# yecchhh
+file { '/opt/graphite/storage/graphite.db':
+    ensure  => present,
+    owner   => 'apache',
+    group   => 'apache',
+    mode    => '0664',
+    require => Exec['syncdb']
 }
 
 
