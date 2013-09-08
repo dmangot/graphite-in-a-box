@@ -28,14 +28,15 @@ From there getting started is as easy as
 1. Git clone this project
 2. Add 'graphite' to the end of the line containing 127.0.0.1 in */etc/hosts* (Linux and Mac)
 3. vagrant up
-4. Go to *http://graphite:8080/
+4. Go to *http://graphite:8080/* in your browser
 
 That's it.  Port 2003 and 2004 are mapped as usual.
 
 # Future Plans
 
 * Make the puppet code more organized, right now everything is in one place
-* Map the Graphite storage directory as a shared folder for increased storage space
 * Support some kind of switches to allow different tools to feed the instance (collectd, etc)
+* Integrate statsd?
+* Integrate different dashboard tools?
 
 Pull requests, issues, and RFEs welcome.
